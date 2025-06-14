@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css" media="screen">
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+</head>
+<body>
+
+<div id="editor"></div>
+
+<script src="js/ace/ace.js"></script>
+<script src="js/ace/ext-language_tools.js"></script>
+
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/celery");
+    editor.session.setMode("ace/mode/lua");
+
+    editor.setOptions({
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+        enableBasicAutocompletion: true,
+        cursorStyle: "slim",
+        showPrintMargin: false,
+        useWorker: true,
+        animatedScroll: true,
+        displayIndentGuides: true,
+    });
+    editor.getSession().on("change", () => {
+        CefSharp.PostMessage(JSON.stringify({ type: 1, value: "" }))
+    })
+</script>
+</body>
+</html>
+
+<!-- Good themes: nord_dark, one_dark, dracula, tomorrow_night-->
